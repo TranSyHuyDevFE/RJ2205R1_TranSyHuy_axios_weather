@@ -20,11 +20,14 @@ searchInput.addEventListener("change", (e) => {
       const data = await res.data;
       console.log(`[Search Input]`, data);
       cityName.innerHTML = data.name || Default_values;
-      weatherState.innerHTML = data.weather[0].description || Default_values;
-      weatherIcon.setAttribute(
+      if (data.weather.length) {
+        weatherState.innerHTML = data.weather[0].description || Default_values;
+        weatherIcon.setAttribute(
         "src",
         `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
       );
+      }
+      
       temperaTure.innerHTML = Math.round(data.main.temp) || Default_values;
 
       sunrise.innerHTML =
